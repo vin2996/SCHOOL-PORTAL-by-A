@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input Student Grades</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 30px;
+            background-color: #f9f9f9;
+        }
+        form {
+            max-width: 500px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label, select, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        input[type="text"], input[type="number"], select {
+            padding: 10px;
+        }
+        button {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #21618c;
+        }
+    </style>
+</head>
+<body>
+    <h2>Input Student Grades</h2>
+    <form method="post">
+        <label>Student Name:</label>
+        <input type="text" name="student" required>
+
+        <label>Select Class/Subject:</label>
+        <select name="class_id" required>
+            <option value="">-- Choose Class --</option>
+            {% for cls in classes %}
+                <option value="{{ cls[0] }}">{{ cls[2] }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Attendance Score (0-100):</label>
+        <input type="number" name="attendance" min="0" max="100" required>
+
+        <label>Quizzes Score (0-100):</label>
+        <input type="number" name="quizzes" min="0" max="100" required>
+
+        <label>Performance Score (0-100):</label>
+        <input type="number" name="performance" min="0" max="100" required>
+
+        <label>Exams Score (0-100):</label>
+        <input type="number" name="exams" min="0" max="100" required>
+
+        <button type="submit">Submit Grades</button>
+    </form>
+</body>
+</html>

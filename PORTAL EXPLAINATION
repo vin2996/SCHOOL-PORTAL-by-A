@@ -1,0 +1,155 @@
+# 🔸 Imports ug Flask App Setup
+
+from flask import Flask, request, redirect, url_for, session
+
+app = Flask(__name__)
+app.secret_key = "moko_ng_secret_key"
+# ➡ Explanation 
+
+# Flask – mao ni ang web framework nga gigamit para makahimo og web app.
+
+# request – para kuhaon ang data gikan sa form (login form, edit grades, etc).
+
+# redirect, url_for – para mo-redirect sa lain nga route (pananglitan, human login, redirect sa dashboard).
+
+# session – gigamit para ma-save ang session data sa user (kinsa ni login, unsa iyang role).
+
+# Ang app.secret_key importante para sa seguridad sa session — dili ni dapat ibutang lang og klaro sa production.
+
+# 🔸 Users ug Students Data
+
+users = {
+    "admin": {"password": "password123", "role": "admin"},
+    ...
+}
+
+students = [
+    {"id": 1, "name": "Alvin...", "grades": {...}},
+    ...
+]
+# ➡ Explanation:
+
+# users – dictionary sa mga registered users (admin, teacher, student) ug ilang roles.
+
+# students – list of dictionaries nga nagrepresenta sa mga estudyante ug ilang grades.
+
+# Sa tinuod nga app, dapat naa ni sa database, pero para sa simple nga demo, static lang ni sila.
+
+# 🔸 Home Route
+@app.route('/')
+def home():
+    if 'username' in session:
+        return redirect(url_for('dashboard'))
+    return redirect(url_for('login'))
+# ➡ Explanation:
+
+# Kung naka-login na, i-redirect sa dashboard.
+
+# Kung wala pa, i-redirect sa login.
+
+# 🔸 Login Page
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    ...
+# ➡ Explanation:
+
+# GET – ipakita ang login form.
+
+# POST – kuhaon ang username/password gikan sa form ug i-check kung sakto ba.
+
+# Kung valid, i-save sa session ang username ug role, then i-redirect sa dashboard.
+
+# 🔸 Dashboard Route
+@app.route('/dashboard')
+def dashboard():
+    ...
+# ➡ Explanation:
+
+# Based sa role (admin, teacher, student), i-redirect sa sakto nga dashboard.
+
+# 🔸 Admin, Teacher, Student Dashboards
+
+@app.route('/dashboard_admin')
+def dashboard_admin():
+    ...
+# ➡ Explanation:
+
+# Para lang sa admin – makita niya tanang options: students, teachers, add user, etc.
+
+# Teacher – makatan-aw sa students ug grades.
+
+# Student – makakita sa iyang sariling grades lang.
+
+# 🔸 List Students
+@app.route('/students')
+def list_students():
+    ...
+➡ Explanation:
+
+# Para lang sa admin ug teacher.
+
+# Nagpakita sa list sa tanang students ug ilang grades.
+
+# Naay option nga “Edit Grades”.
+
+# 🔸 Edit Grades
+@app.route('/edit_grades/<int:student_id>', methods=['GET', 'POST'])
+def edit_grades(student_id):
+    ...
+# ➡ Explanation:
+
+# I-search ang student base sa id.
+
+# GET – ipakita ang form nga puno sa current grades.
+
+# POST – kuhaon ang bagong values ug i-update ang grades.
+
+# 🔸 List Teachers
+@app.route('/teachers')
+def list_teachers():
+    ...
+# ➡ Explanation:
+
+# Admin ra ang pwede makakita sa list sa mga teachers.
+
+# 🔸 Add Student / Add Teacher
+@app.route('/add_student', methods=['GET', 'POST'])
+...
+➡ Explanation:
+
+# Form para makadugang og bagong student o teacher.
+
+# I-check kung unique ang username, i-assign og bagong id (para sa student).
+
+# 🔸 Change Password
+@app.route('/change_password', methods=['GET', 'POST'])
+...
+# ➡ Explanation:
+
+# Tanang users pwede mag-ilis sa ilang password.
+
+# I-check kung sakto ang current password, unya i-update ang bag-o.
+
+# 🔸 Logout
+@app.route('/logout')
+def logout():
+    ...
+# ➡ Explanation:
+
+# Tangtangon ang session data.
+
+# I-logout ang user ug i-redirect balik sa login page.
+
+# 🔸 Run the App
+if __name__ == '__main__':
+    app.run(debug=True)
+➡ Explanation:
+
+# debug=True – para sayon pag-troubleshoot (automatic reload ug error messages during development).
+
+# ✅ Summary sa Functionalities:
+# Role	Unsa'y mabuhat niya
+# Admin	Tanang access – students, teachers, add users
+# Teacher	Tan-aw og edit sa students ug grades
+# Student	Tan-aw sa iyang sariling grades lang
+

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Class - Define AQPE Criteria</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 30px;
+            background-color: #fafafa;
+        }
+        form {
+            max-width: 400px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+        label, input {
+            display: block;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #27ae60;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+        button:hover {
+            background-color: #1e8449;
+        }
+        p.note {
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h2>Create a New Class</h2>
+    <form method="post">
+        <label>Subject Name:</label>
+        <input type="text" name="subject" required>
+
+        <label>Attendance Percentage (%)</label>
+        <input type="number" name="a" min="0" max="100" required>
+
+        <label>Quizzes Percentage (%)</label>
+        <input type="number" name="q" min="0" max="100" required>
+
+        <label>Performance Percentage (%)</label>
+        <input type="number" name="p" min="0" max="100" required>
+
+        <label>Exams Percentage (%)</label>
+        <input type="number" name="e" min="0" max="100" required>
+
+        <p class="note">*Total must add up to 100%</p>
+
+        <button type="submit">Create Class</button>
+    </form>
+</body>
+</html>

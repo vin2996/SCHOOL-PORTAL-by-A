@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Dashboard</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 40px;
+            background-color: #f7f7f7;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        a {
+            display: block;
+            margin: 15px 0;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            width: 250px;
+        }
+        a:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ session['username'] }} (Teacher)</h1>
+    <a href="{{ url_for('create_class') }}">➕ Create Class with Custom Criteria</a>
+    <a href="{{ url_for('input_grades') }}">📝 Input Student Grades</a>
+    <a href="{{ url_for('logout') }}">🚪 Logout</a>
+</body>
+</html>
